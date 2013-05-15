@@ -1,3 +1,6 @@
+The only change in this fork is the addition of the -DSQLITE_ENABLE_FTS3=1 build flag.  Silly to fork for that reason, but better
+than copying all the code into another existing repository.
+
 == SQLCipher ==
 
 SQLCipher is an SQLite extension that provides transparent 256-bit AES encryption of 
