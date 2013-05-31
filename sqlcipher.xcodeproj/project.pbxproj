@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
+		8873ED861756745D00637EFC /* sqlcipher combined */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 8873ED891756745D00637EFC /* Build configuration list for PBXAggregateTarget "sqlcipher combined" */;
+			buildPhases = (
+				8873ED8A1756747E00637EFC /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = "sqlcipher combined";
+			productName = staticLibrary;
+		};
 		9069D08B0FCE185A0042E34C /* amalgamation */ = {
 			isa = PBXAggregateTarget;
 			buildConfigurationList = 9069D0900FCE18970042E34C /* Build configuration list for PBXAggregateTarget "amalgamation" */;
@@ -138,11 +149,25 @@
 			targets = (
 				D2AAC045055464E500DB518D /* sqlcipher */,
 				9069D08B0FCE185A0042E34C /* amalgamation */,
+				8873ED861756745D00637EFC /* sqlcipher combined */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		8873ED8A1756747E00637EFC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "XCODEBUILD_PATH=/Applications/Xcode.app/Contents/Developer/usr/bin\nXCODEBUILD=$XCODEBUILD_PATH/xcodebuild\n\n$XCODEBUILD -project sqlcipher.xcodeproj -target \"sqlcipher\" -sdk \"iphonesimulator\" -configuration \"Release\" clean build\n$XCODEBUILD -project sqlcipher.xcodeproj -target \"sqlcipher\" -sdk \"iphoneos\" -configuration \"Release\" clean build\n\npwd\nlipo -create -output \"build/libsqlcipher.a\" \"build/Release-iphoneos/libsqlcipher.a\" \"build/Release-iphonesimulator/libsqlcipher.a\"";
+		};
 		9069D08A0FCE185A0042E34C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -275,6 +300,21 @@
 			};
 			name = Release;
 		};
+		8873ED871756745D00637EFC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8873ED881756745D00637EFC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		9069D08C0FCE185A0042E34C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -314,6 +354,15 @@
 			buildConfigurations = (
 				1DEB91F008733DB70010E9CD /* Debug */,
 				1DEB91F108733DB70010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8873ED891756745D00637EFC /* Build configuration list for PBXAggregateTarget "sqlcipher combined" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8873ED871756745D00637EFC /* Debug */,
+				8873ED881756745D00637EFC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
