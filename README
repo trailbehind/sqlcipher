@@ -1,5 +1,6 @@
-The only change in this fork is the addition of the -DSQLITE_ENABLE_FTS3=1 build flag.  Silly to fork for that reason, but better
-than copying all the code into another existing repository.
+This fork has two changes from the main sqlcipher repo, it adds the  -DSQLITE_ENABLE_FTS3=1 build flag, and adds a target that builds a static library with slices for armv7, armv7s and the simulator.
+
+To use it pull, the git submodule init, open the Xcode project, build the static library target, and then get your library from build/libsqlcipher.a
 
 == SQLCipher ==
 
