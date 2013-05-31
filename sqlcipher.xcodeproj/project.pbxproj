@@ -11,7 +11,7 @@
 			isa = PBXAggregateTarget;
 			buildConfigurationList = 8873ED891756745D00637EFC /* Build configuration list for PBXAggregateTarget "sqlcipher combined" */;
 			buildPhases = (
-				8873ED8A1756747E00637EFC /* ShellScript */,
+				8873ED8A1756747E00637EFC /* Run Script */,
 			);
 			dependencies = (
 			);
@@ -188,18 +188,19 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		8873ED8A1756747E00637EFC /* ShellScript */ = {
+		8873ED8A1756747E00637EFC /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "XCODEBUILD_PATH=/Applications/Xcode.app/Contents/Developer/usr/bin\nXCODEBUILD=$XCODEBUILD_PATH/xcodebuild\n\n$XCODEBUILD -project sqlcipher.xcodeproj -target \"sqlcipher\" -sdk \"iphonesimulator\" -configuration \"Release\" clean build\n$XCODEBUILD -project sqlcipher.xcodeproj -target \"sqlcipher\" -sdk \"iphoneos\" -configuration \"Release\" clean build\n\npwd\nlipo -create -output \"build/libsqlcipher.a\" \"build/Release-iphoneos/libsqlcipher.a\" \"build/Release-iphonesimulator/libsqlcipher.a\"";
+			shellScript = "rm -rf build\nXCODEBUILD_PATH=/Applications/Xcode.app/Contents/Developer/usr/bin\nXCODEBUILD=$XCODEBUILD_PATH/xcodebuild\n\n$XCODEBUILD -project sqlcipher.xcodeproj -target \"sqlcipher\" -sdk \"iphonesimulator\" -configuration \"Release\" clean build\n$XCODEBUILD -project sqlcipher.xcodeproj -target \"sqlcipher\" -sdk \"iphoneos\" -arch \"armv7\" -configuration \"Release\" clean build\nmv build/Release-iphoneos build/Release-iphoneos-armv7\n$XCODEBUILD -project sqlcipher.xcodeproj -target \"sqlcipher\" -sdk \"iphoneos\" -arch \"armv7s\" -configuration \"Release\" clean build\nmv build/Release-iphoneos build/Release-iphoneos-armv7s\n\nlipo -create -output \"build/libsqlcipher.a\" \"build/Release-iphoneos-armv7/libsqlcipher.a\" \"build/Release-iphoneos-armv7s/libsqlcipher.a\" \"build/Release-iphonesimulator/libsqlcipher.a\" \n";
 		};
 		9069D08A0FCE185A0042E34C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -305,10 +306,11 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = "$(PLATFORM_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator macosx iphoneos";
+				VALID_ARCHS = "i386 x86_64 armv7s armv7";
 			};
 			name = Debug;
 		};
@@ -330,6 +332,7 @@
 				SDKROOT = "$(PLATFORM_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator macosx iphoneos";
+				VALID_ARCHS = "i386 x86_64 armv7s armv7";
 			};
 			name = Release;
 		};
